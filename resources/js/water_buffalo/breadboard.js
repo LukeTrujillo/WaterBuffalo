@@ -1,0 +1,3 @@
+var BreadboardEntity = {
+  TAG: 'breadboard'
+}

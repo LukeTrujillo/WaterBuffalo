@@ -11,7 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js(['resources/js/app.js', 'resources/js/water_buffalo/lib/phaser.js'], 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+
+mix.js([
+        "resources/js/water_buffalo/breadboard.js",
+        'resources/js/water_buffalo/game.js'
+      ], "public/js");
+
+mix.copyDirectory('resources/assets', 'public/assets');
