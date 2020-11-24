@@ -17,6 +17,8 @@ const mix = require('laravel-mix');
     ]);*/
 
 mix.scripts(['resources/js/water_buffalo/constants.js',
+        'resources/js/water_buffalo/breadboard.js',
+        'resources/js/water_buffalo/components.js',
         'resources/js/water_buffalo/game.js'
       ], "public/js/game.js");
 
