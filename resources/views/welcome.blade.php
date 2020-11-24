@@ -5,6 +5,7 @@
 <body>
 
     <script src="js/app.js"></script>
-    <script src="js/breadboard.js"></script>
+    <script src="js/game.js"></script>
+
 </body>
 </html>

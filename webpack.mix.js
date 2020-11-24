@@ -11,14 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js(['resources/js/app.js', 'resources/js/water_buffalo/lib/phaser.js'], 'public/js')
+/*mix.js(['resources/js/app.js', 'resources/js/water_buffalo/lib/phaser.js'], 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+    ]);*/
 
-mix.js([
-        "resources/js/water_buffalo/breadboard.js",
+mix.scripts(['resources/js/water_buffalo/constants.js',
         'resources/js/water_buffalo/game.js'
-      ], "public/js");
+      ], "public/js/game.js");
 
 mix.copyDirectory('resources/assets', 'public/assets');

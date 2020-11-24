@@ -1,9 +1,29 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "noImplicitAny": false,
-    "sourceMap": false
-  },
-  "include": ["resources/js/water_buffalo/**/*"]
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": true,
+		"noImplicitAny": false,
+		"noEmit": true,
+		"allowJs": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"baseUrl": "./resources/js",
+		"paths": {
+		  "~/*": ["./*"]
+		},
+		"typeRoots": [
+			"node_modules/@types",
+			"node_module/phaser/types"
+		],
+		"types": [
+			"Phaser"
+		]
+	  },
+	  "include": ["resources/js/**/*"]
 }

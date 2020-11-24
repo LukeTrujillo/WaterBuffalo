@@ -81,62 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/water_buffalo/breadboard.js":
-/*!**************************************************!*\
-  !*** ./resources/js/water_buffalo/breadboard.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var BreadboardEntity = {
-  TAG: 'breadboard'
-};
-
-/***/ }),
-
-/***/ "./resources/js/water_buffalo/game.js":
-/*!********************************************!*\
-  !*** ./resources/js/water_buffalo/game.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 800,
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  }
-};
-var game = new Phaser.Game(config);
-
-function preload() {
-  this.load.image('tes', 'assets/download.jpg');
-}
-
-function create() {}
-
-function update() {}
-
-/***/ }),
-
-/***/ 1:
-/*!*********************************************************************************************!*\
-  !*** multi ./resources/js/water_buffalo/breadboard.js ./resources/js/water_buffalo/game.js ***!
-  \*********************************************************************************************/
+/***/ 2:
+/*!************************************!*\
+  !*** multi ./resources/js/test.ts ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Sites\water-buffalo\resources\js\water_buffalo\breadboard.js */"./resources/js/water_buffalo/breadboard.js");
-module.exports = __webpack_require__(/*! C:\Sites\water-buffalo\resources\js\water_buffalo\game.js */"./resources/js/water_buffalo/game.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Sites\\water-buffalo\\resources\\js\\test.ts'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })
