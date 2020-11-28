@@ -2,7 +2,7 @@ var breadboard_section = 0;
 var breadboard_row = 0
 var breadboard_column = 0;
 
-var startClick = null;
+var wiremaker = null;
 
 class BreadboardPoint extends Phaser.GameObjects.Sprite {
   static KEY = 'breadboard_points';
@@ -23,25 +23,21 @@ class BreadboardPoint extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
   }
 
-
   onPointerOver() {
-    this.setFrame(2);
+      this.setFrame(2)
   }
   onPointerOut() {
-    this.setFrame(0);
+      this.setFrame(0)
   }
 
   onPointClick() {
-    if(startClick == null) {
-      startClick = this;
-
-        new Wire(this.scene);
+    if(wiremaker == null) {
+      wiremaker = new WireMaker(this);
     } else {
-      console.log("ending click")
-
-
-      startClick = null;
+      wiremaker.make(this);
+      wiremaker = null;
     }
+
   }
 
 }

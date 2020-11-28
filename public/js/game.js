@@ -4,15 +4,18 @@ const BREADBOARD_NUM_SECTIONS = 2;
 
 const BREADBOARD_POINT_SIZE = 32;
 const BREADBOARD_POINT_DISTANCE = 16;
-const BREADBOARD_ROW_DISTANCE = BREADBOARD_POINT_SIZE + BREADBOARD_POINT_DISTANCE;
+const BREADBOARD_ROW_DISTANCE = (BREADBOARD_POINT_SIZE + BREADBOARD_POINT_DISTANCE);
 
 const BREADBOARD_SECTIONS_SPACE = BREADBOARD_ROW_DISTANCE * 2;
+const WIRE_WIDTH = 8;
+
+const BREADBOARD_POINT_INNER_RADIUS = 8;
 
 var breadboard_section = 0;
 var breadboard_row = 0
 var breadboard_column = 0;
 
-var startClick = null;
+var wiremaker = null;
 
 class BreadboardPoint extends Phaser.GameObjects.Sprite {
   static KEY = 'breadboard_points';
@@ -33,25 +36,21 @@ class BreadboardPoint extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
   }
 
-
   onPointerOver() {
-    this.setFrame(2);
+      this.setFrame(2)
   }
   onPointerOut() {
-    this.setFrame(0);
+      this.setFrame(0)
   }
 
   onPointClick() {
-    if(startClick == null) {
-      startClick = this;
-
-        new Wire(this.scene);
+    if(wiremaker == null) {
+      wiremaker = new WireMaker(this);
     } else {
-      console.log("ending click")
-
-
-      startClick = null;
+      wiremaker.make(this);
+      wiremaker = null;
     }
+
   }
 
 }
@@ -104,25 +103,66 @@ function createBreadboardRow(scene, row_length, base_x, base_y) {
   }
 }
 
-class Wire extends Phaser.GameObjects.Sprite {
 
-  static KEY = 'breadboard_connector';
-
-  constructor(scene) {
-      var mouse = scene.input.activePointer;
-
-      super(scene, mouse.worldX, mouse.worldY, Wire.KEY, 1);
-
-      scene.add.existing(this);
-
-      this.angle = 90
-
+class WireMaker {
+  constructor(starting) {
+    this.starting = starting;
   }
 
-  preUpdate(time, delta) {
-    var mouse = this.scene.input.activePointer;
-    this.x = mouse.worldX;
-    this.y = mouse.worldY;
+  make(ending) {
+    new Wire(this.starting, ending)
+  }
+}
+
+class Wire extends Phaser.GameObjects.Line {
+  constructor(starting, ending) {
+      super(starting.scene, 0, 0, 0, 0, 0, 0, 0xFF0000);
+
+      this.starting = starting;
+      this.ending = ending;
+
+      this.place();
+
+      this.scene.add.existing(this);
+      this.setLineWidth(WIRE_WIDTH);
+  }
+
+  place() {
+    var deltaX = this.ending.x - this.starting.x;
+    var deltaY = this.ending.y - this.starting.y;
+
+    var angle_radians = Math.atan(deltaY / deltaX);
+    angle_radians = Math.abs(angle_radians);
+
+    var startingX = this.starting.x;
+    var startingY = this.starting.y;
+
+    var endingX = this.ending.x;
+    var endingY = this.ending.y;
+
+    var xModifier = (BREADBOARD_POINT_INNER_RADIUS * Math.cos(angle_radians));
+    var yModifier = (BREADBOARD_POINT_INNER_RADIUS * Math.sin(angle_radians));
+
+    if(deltaX < 0) {
+      startingX -= xModifier;
+      endingX += xModifier;
+    } else {
+      startingX += xModifier;
+      endingX -= xModifier;
+    }
+
+    if(deltaY < 0) {
+      startingY -= yModifier;
+      endingY += yModifier;
+    } else {
+      startingY += yModifier;
+      endingY -= yModifier;
+    }
+
+    this.setTo(startingX, startingY, endingX, endingY);
+
+    this.starting.off("pointerover")
+
   }
 }
 
