@@ -1,4 +1,29 @@
-var breadboard_section = 0;
+class Breadboard extends Phaser.GameObjects.Sprite {
+  static BREADBOARD_X = 300;
+  static BREADBOARD_Y = 200;
+
+  static KEY = "breadboard";
+
+  constructor(scene) {
+    super(scene, Breadboard.BREADBOARD_X, Breadboard.BREADBOARD_Y, Breadboard.KEY, 0);
+    scene.add.existing(this);
+  }
+
+  static preload(scene) {
+    scene.load.image(Breadboard.KEY,
+         'assets/breadboard.png');
+  }
+
+}
+
+class BreadboardRow extends Phaser.GameObject.Group {
+  
+}
+
+
+
+
+/*var breadboard_section = 0;
 var breadboard_row = 0
 var breadboard_column = 0;
 
@@ -73,7 +98,7 @@ function createBreadboardSection(scene, num_rows, base_x, base_y) {
 /*
  Base x and base y is the location of the top most point
  */
-function createBreadboardRow(scene, row_length, base_x, base_y) {
+/*function createBreadboardRow(scene, row_length, base_x, base_y) {
   var row = scene.physics.add.staticGroup()
 
   for (var x = 0; x < row_length; x++) {
@@ -88,4 +113,4 @@ function createBreadboardRow(scene, row_length, base_x, base_y) {
 
     breadboard_column++;
   }
-}
+}*/

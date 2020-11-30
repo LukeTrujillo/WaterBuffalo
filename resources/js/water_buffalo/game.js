@@ -1,7 +1,7 @@
 var config = {
        type: Phaser.AUTO,
-       width: 800,
-       height: 600,
+       width: 600,
+       height: 400,
        physics: {
            default: 'arcade',
            arcade: {
@@ -20,19 +20,15 @@ var config = {
 
    function preload ()
    {
-       this.load.spritesheet('breadboard_points',
-            'assets/bread_points_rounded.png',
-            { frameWidth: 32, frameHeight: 32 }
-        );
-        this.load.spritesheet('breadboard_connector',
-             'assets/bread_board_connector.png',
-             { frameWidth: 8, frameHeight: 16 }
-         );
+      Breadboard.preload(this);
    }
 
    function create () {
-     this.cameras.main.setBackgroundColor('#FFFFFF')
-     createBreadboard(this, BREADBOARD_NUM_SECTIONS, 0, 0);
+     this.cameras.main.setBackgroundColor('#000000')
+
+     console.log("here")
+
+     new Breadboard(this);
    }
    function update() {
 

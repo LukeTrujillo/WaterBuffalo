@@ -11,7 +11,32 @@ const WIRE_WIDTH = 8;
 
 const BREADBOARD_POINT_INNER_RADIUS = 8;
 
-var breadboard_section = 0;
+class Breadboard extends Phaser.GameObjects.Sprite {
+  static BREADBOARD_X = 300;
+  static BREADBOARD_Y = 200;
+
+  static KEY = "breadboard";
+
+  constructor(scene) {
+    super(scene, Breadboard.BREADBOARD_X, Breadboard.BREADBOARD_Y, Breadboard.KEY, 0);
+    scene.add.existing(this);
+  }
+
+  static preload(scene) {
+    scene.load.image(Breadboard.KEY,
+         'assets/breadboard.png');
+  }
+
+}
+
+class BreadboardRow extends Phaser.GameObject.Group {
+  
+}
+
+
+
+
+/*var breadboard_section = 0;
 var breadboard_row = 0
 var breadboard_column = 0;
 
@@ -86,7 +111,7 @@ function createBreadboardSection(scene, num_rows, base_x, base_y) {
 /*
  Base x and base y is the location of the top most point
  */
-function createBreadboardRow(scene, row_length, base_x, base_y) {
+/*function createBreadboardRow(scene, row_length, base_x, base_y) {
   var row = scene.physics.add.staticGroup()
 
   for (var x = 0; x < row_length; x++) {
@@ -101,7 +126,7 @@ function createBreadboardRow(scene, row_length, base_x, base_y) {
 
     breadboard_column++;
   }
-}
+}*/
 
 
 class WireMaker {
@@ -162,14 +187,13 @@ class Wire extends Phaser.GameObjects.Line {
     this.setTo(startingX, startingY, endingX, endingY);
 
     this.starting.off("pointerover")
-
   }
 }
 
 var config = {
        type: Phaser.AUTO,
-       width: 800,
-       height: 600,
+       width: 600,
+       height: 400,
        physics: {
            default: 'arcade',
            arcade: {
@@ -188,19 +212,15 @@ var config = {
 
    function preload ()
    {
-       this.load.spritesheet('breadboard_points',
-            'assets/bread_points_rounded.png',
-            { frameWidth: 32, frameHeight: 32 }
-        );
-        this.load.spritesheet('breadboard_connector',
-             'assets/bread_board_connector.png',
-             { frameWidth: 8, frameHeight: 16 }
-         );
+      Breadboard.preload(this);
    }
 
    function create () {
-     this.cameras.main.setBackgroundColor('#FFFFFF')
-     createBreadboard(this, BREADBOARD_NUM_SECTIONS, 0, 0);
+     this.cameras.main.setBackgroundColor('#000000')
+
+     console.log("here")
+
+     new Breadboard(this);
    }
    function update() {
 

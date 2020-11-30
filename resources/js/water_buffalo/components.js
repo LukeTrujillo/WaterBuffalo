@@ -57,6 +57,5 @@ class Wire extends Phaser.GameObjects.Line {
     this.setTo(startingX, startingY, endingX, endingY);
 
     this.starting.off("pointerover")
-
   }
 }
